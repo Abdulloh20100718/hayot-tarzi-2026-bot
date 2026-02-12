@@ -1,0 +1,19 @@
+name: 24/7 Telegram Bot
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'   # har 3 soatda
+  workflow_dispatch:        # qo‘lda ishga tushirish
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
+      - run: python hayot_bot_2026.py
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
